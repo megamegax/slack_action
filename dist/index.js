@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const axios = require('axios');
-import Message from './MessageFactory.js'
+import Message from './../MessageFactory.js'
 
 const SLACK_APP_TOKEN = process.env['SLACK_APP_TOKEN'];
 
