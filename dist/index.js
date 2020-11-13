@@ -45,13 +45,11 @@ class Message {
     actions
   ) {
 
-    if (footer == '') {
-      footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
-    }
+    footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
 
-    if (actions != '') {
-      actions = JSON.parse(actions);
-    }
+    //  if (actions != '') {
+    //    actions = JSON.parse(actions);
+    //  }
 
     let attachments;
     if (authorName == '' && title == '' && body == '' && fields == '' && image == '' && thumbnail == '' && actions == '') {
@@ -71,7 +69,7 @@ class Message {
         "footer": footer,
         "footer_icon": footerIcon,
         "ts": Math.floor(new Date().getTime() / 1000),
-        "actions": actions,
+        //  "actions": actions,
       };
     }
 
