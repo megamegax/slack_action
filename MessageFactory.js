@@ -2,7 +2,7 @@ const github = require('@actions/github');
 
 export default class Message {
 
-  _jobParameters(status) {
+  static _jobParameters(status) {
     switch (status) {
       case "success": return {
         color: 'good',
@@ -62,7 +62,7 @@ export default class Message {
     };
   }
 
-  _getMessage() {
+  static _getMessage() {
     const eventName = context.eventName;
     const runUrl = `${context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
     const commitId = context.sha.substring(0, 7);
