@@ -24,9 +24,6 @@ export default class Message {
     userIcon,
     actions
   ) {
-    if (fields != '') {
-      fields = JSON.parse(fields);
-    }
 
     if (footer == '') {
       footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
@@ -45,10 +42,10 @@ export default class Message {
         "author_name": github.context.payload.sender.login,
         "author_link": github.context.payload.sender.html_url,
         "author_icon": github.context.payload.sender.avatar_url,
-        "title": title,
-        "title_link": titleLink,
+        "title": message,
+        //  "title_link": titleLink,
         "text": getMessage().text,
-        "fields": fields,
+        "fields": getMessage().fields,
         "image_url": image,
         "thumb_url": thumbnail,
         "footer": footer,
