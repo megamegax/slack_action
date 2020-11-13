@@ -1,4 +1,4 @@
-name: 'slack action'
+name: 'slack_action'
 description: 'Post to Slack'
 branding:
   icon: 'bell'
