@@ -22,7 +22,7 @@ const github = __webpack_require__(3134);
 
 class Message {
 
-  static _jobParameters(status) {
+  static jobParameters(status) {
     switch (status) {
       case "success": return {
         color: 'good',
@@ -56,14 +56,14 @@ class Message {
       attachments = {};
     } else {
       attachments = {
-        "color": _jobParameters(jobStatus).color,
+        "color": Message.jobParameters(jobStatus).color,
         "author_name": github.context.payload.sender.login,
         "author_link": github.context.payload.sender.html_url,
         "author_icon": github.context.payload.sender.avatar_url,
         "title": message,
         //  "title_link": titleLink,
-        "text": getMessage().text,
-        "fields": getMessage().fields,
+        "text": Message.getMessage().text,
+        "fields": Message.getMessage().fields,
         // "image_url": image,
         //"thumb_url": thumbnail,
         // "footer": footer,
@@ -82,7 +82,7 @@ class Message {
     };
   }
 
-  static _getMessage() {
+  static getMessage() {
     const eventName = context.eventName;
     const runUrl = `${context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
     const commitId = context.sha.substring(0, 7);
