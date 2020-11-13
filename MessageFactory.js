@@ -25,7 +25,7 @@ export default class Message {
     actions
   ) {
 
-    let footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
+    //let footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
 
     //  if (actions != '') {
     //    actions = JSON.parse(actions);
@@ -46,7 +46,7 @@ export default class Message {
         "fields": getMessage().fields,
        // "image_url": image,
         //"thumb_url": thumbnail,
-        "footer": footer,
+       // "footer": footer,
         //"footer_icon": footerIcon,
         "ts": Math.floor(new Date().getTime() / 1000),
         //  "actions": actions,
