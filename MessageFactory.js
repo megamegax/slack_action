@@ -32,7 +32,7 @@ export default class Message {
     //  }
 
     let attachments;
-    if (authorName == '' && title == '' && body == '' && fields == '' && image == '' && thumbnail == '' && actions == '') {
+    if (message == '' && actions == '') {
       attachments = {};
     } else {
       attachments = {
@@ -44,9 +44,9 @@ export default class Message {
         //  "title_link": titleLink,
         "text": getMessage().text,
         "fields": getMessage().fields,
-       // "image_url": image,
+        // "image_url": image,
         //"thumb_url": thumbnail,
-       // "footer": footer,
+        // "footer": footer,
         //"footer_icon": footerIcon,
         "ts": Math.floor(new Date().getTime() / 1000),
         //  "actions": actions,
