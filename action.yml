@@ -1,4 +1,4 @@
-name: 'slack post action'
+name: 'slack action'
 description: 'Post to Slack'
 branding:
   icon: 'bell'
@@ -6,6 +6,9 @@ branding:
 inputs:
   channel:
     description: 'channel'
+    required: true
+  job_status:
+    description: 'success|failed|canceled'
     required: true
   message:
     description: 'message'
