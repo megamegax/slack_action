@@ -10,34 +10,27 @@ module.exports = JSON.parse("{\"_from\":\"axios@^0.21.0\",\"_id\":\"axios@0.21.0
 
 /***/ }),
 
-/***/ 1249:
+/***/ 6423:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./JobStatus.js
-/* harmony default export */ const JobStatus_0 = (JobStatus = {
-    SUCCESS: "success",
-    FAILURE: "failure",
-    CANCELLED: "cancelled"
-});
 // CONCATENATED MODULE: ./MessageFactory.js
 const github = __webpack_require__(3134);
-
 
 class Message {
 
   _jobParameters(status) {
     switch (status) {
-      case JobStatus_0.SUCCESS: return {
+      case "success": return {
         color: 'good',
       }
-      case JobStatus_0.FAILURE: return {
+      case "failure": return {
         color: 'danger',
       }
-      case JobStatus_0.CANCELLED: return {
+      case "cancelled": return {
         color: 'warning',
       }
     }
@@ -8684,6 +8677,6 @@ module.exports = require("zlib");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(1249);
+/******/ 	return __webpack_require__(6423);
 /******/ })()
 ;

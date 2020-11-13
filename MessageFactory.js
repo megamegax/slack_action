@@ -1,17 +1,16 @@
 const github = require('@actions/github');
-import JobStatus from './JobStatus.js'
 
 export default class Message {
 
   _jobParameters(status) {
     switch (status) {
-      case JobStatus.SUCCESS: return {
+      case "success": return {
         color: 'good',
       }
-      case JobStatus.FAILURE: return {
+      case "failure": return {
         color: 'danger',
       }
-      case JobStatus.CANCELLED: return {
+      case "cancelled": return {
         color: 'warning',
       }
     }
