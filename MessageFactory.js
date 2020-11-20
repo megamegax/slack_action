@@ -63,17 +63,17 @@ export default class Message {
 		let context = github.context;
 		const eventName = context.eventName;
 		const runUrl = `${context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-    const commitId = context.sha.substring(0, 7);
+		const commitId = context.sha.substring(0, 7);
 		switch (eventName) {
 			case 'pull_request':
-        const compareUrl = context.payload.repository.compare_url
-        const pr = context.payload.repository.pr
-				return {        
+				const compareUrl = context.payload.repository.compare_url;
+				const pr = context.payload.repository.pr;
+				return {
 					text: `(<${compareUrl}|${commitId}>) for PR <${pr.url}| #${pr.number} ${pr.title}>`,
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
 							short: true
 						},
 						{
@@ -92,7 +92,7 @@ export default class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
 							short: true
 						},
 						{
@@ -106,12 +106,13 @@ export default class Message {
 				};
 
 			case 'push':
+        const headCommit = context.headCommit;
 				return {
 					text: `<${headCommit.url}| ${headCommit.title}>`,
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
 							short: true
 						},
 						{
@@ -130,7 +131,7 @@ export default class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
 							short: true
 						},
 						{
