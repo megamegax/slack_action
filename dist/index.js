@@ -93,7 +93,7 @@ class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -112,7 +112,7 @@ class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -132,7 +132,7 @@ class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -147,11 +147,11 @@ class Message {
 
 			case 'workflow_dispatch':
 				return {
-					text: `<${runUrl}| ${github.workflow}>`,
+					text: `<${runUrl}| triggered manually>`,
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -178,44 +178,37 @@ const axios = __webpack_require__(7126);
 const SLACK_WEBHOOK = process.env['SLACK_WEBHOOK'];
 
 async function run() {
-  try {
-    const channel = core.getInput('channel');
-    const message = core.getInput('message');
-    const userName = core.getInput('user_name');
-    const userIcon = core.getInput('user_icon');
-    const jobStatus = core.getInput('job_status');
-    let actions = core.getInput('actions');
+	try {
+		const channel = core.getInput('channel');
+		const message = core.getInput('message');
+		const userName = core.getInput('user_name');
+		const userIcon = core.getInput('user_icon');
+		const jobStatus = core.getInput('job_status');
+		let actions = core.getInput('actions');
 
+		const res = await axios({
+			method: 'post',
+			url: `${SLACK_WEBHOOK}`,
+			data: Message.createMessage(jobStatus, channel, userName, message, userIcon, actions),
+			responseType: 'json',
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8'
+			}
+		});
 
-    const res = await axios({
-      method: 'post',
-      url: `${SLACK_WEBHOOK}`,
-      data: Message.createMessage(jobStatus,
-        channel,
-        userName,
-        message,
-        userIcon,
-        actions),
-      responseType: 'json',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-    });
+		if (!res.data.ok) {
+			throw new Error(res.data.error);
+		}
 
-    if (!res.data.ok) {
-      console.log("resopnse",res)
-      throw new Error(res.data.error);
-    }
-
-    core.setOutput("result", 'success');
-  }
-  catch (error) {
-    core.setOutput("result", 'failure');
-    core.setFailed(error.message);
-  }
+		core.setOutput('result', 'success');
+	} catch (error) {
+		console.log('error', error);
+		core.setOutput('result', 'failure');
+		core.setFailed(error.message);
+	}
 }
 
-run()
+run();
 
 
 /***/ }),

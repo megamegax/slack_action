@@ -73,7 +73,7 @@ export default class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -92,7 +92,7 @@ export default class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -112,7 +112,7 @@ export default class Message {
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
@@ -127,11 +127,11 @@ export default class Message {
 
 			case 'workflow_dispatch':
 				return {
-					text: `<${runUrl}| ${github.workflow}>`,
+					text: `<${runUrl}| triggered manually>`,
 					fields: [
 						{
 							title: 'Repository',
-							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}`,
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
 							short: true
 						},
 						{
