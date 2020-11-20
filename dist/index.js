@@ -193,9 +193,10 @@ async function run() {
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8'
 			}
-		});
-
-		if (!res.data.ok) {
+    });
+    
+		console.log(res);
+		if (!res) {
 			throw new Error(res.data.error);
 		}
 
