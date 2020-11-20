@@ -44,8 +44,8 @@ export default class Message {
 				//"thumb_url": thumbnail,
 				// "footer": footer,
 				//"footer_icon": footerIcon,
-				ts: Math.floor(new Date().getTime() / 1000)
-				//  "actions": actions,
+				ts: Math.floor(new Date().getTime() / 1000),
+				actions: actions
 			};
 		}
 
@@ -66,7 +66,8 @@ export default class Message {
 		switch (eventName) {
 			case 'pull_request':
 				return {
-					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pr.url}| #${context.payload.pr.number} ${context.payload.pr.title}>`,
+					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pr
+						.url}| #${context.payload.pr.number} ${context.payload.pr.title}>`,
 					fields: [
 						{
 							title: 'Repository',
@@ -85,8 +86,8 @@ export default class Message {
 
 			case 'release':
 				return {
-          title:`<${context.payload.release.url}| ${context.payload.release.title}>`,
-					text: "",
+					title: `<${context.payload.release.url}| ${context.payload.release.title}>`,
+					text: '',
 					fields: [
 						{
 							title: 'Repository',
@@ -105,8 +106,8 @@ export default class Message {
 
 			case 'push':
 				return {
-          title:`<${context.payload.head_commit.url}|${context.payload.head_commit.message}>`,
-					text: "",
+					title: `<${context.payload.head_commit.url}|${context.payload.head_commit.message}>`,
+					text: '',
 					fields: [
 						{
 							title: 'Repository',
@@ -125,8 +126,8 @@ export default class Message {
 
 			case 'workflow_dispatch':
 				return {
-          title:`<${runUrl}| triggered manually>`,
-					text: "",
+					title: `<${runUrl}| triggered manually>`,
+					text: '',
 					fields: [
 						{
 							title: 'Repository',
