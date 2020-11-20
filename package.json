@@ -13,6 +13,6 @@
     "axios": "^0.21.0"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.20.5"
+    "@vercel/ncc": "^0.25.1"
   }
 }
