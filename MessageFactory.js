@@ -37,7 +37,7 @@ export default class Message {
 				author_name: context.payload.sender.login,
 				author_link: context.payload.sender.html_url,
 				author_icon: context.payload.sender.avatar_url,
-				title: message,
+				title: Message.getMessage().title,
 				//  "title_link": titleLink,
 				text: Message.getMessage().text,
 				fields: Message.getMessage().fields,
@@ -88,7 +88,8 @@ export default class Message {
 
 			case 'release':
 				return {
-					text: `<${release.url}| ${release.title}>`,
+          title:`<${context.payload.release.url}| ${context.payload.release.title}>`,
+					text: "",
 					fields: [
 						{
 							title: 'Repository',
@@ -106,9 +107,10 @@ export default class Message {
 				};
 
 			case 'push':
-        const headCommit = context.headCommit;
+        const headCommit = context.payload.head_commit;
 				return {
-					text: `<${headCommit.url}| ${headCommit.title}>`,
+          title:`<${headCommit.url}| ${headCommit.message}>`,
+					text: "",
 					fields: [
 						{
 							title: 'Repository',
@@ -127,7 +129,8 @@ export default class Message {
 
 			case 'workflow_dispatch':
 				return {
-					text: `<${runUrl}| triggered manually>`,
+          title:`<${runUrl}| triggered manually>`,
+					text: "",
 					fields: [
 						{
 							title: 'Repository',
