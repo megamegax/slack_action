@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const axios = require('axios');
 import Message from './MessageFactory.js'
 
-const SLACK_APP_TOKEN = process.env['SLACK_WEBHOOK'];
+const SLACK_WEBHOOK = process.env['SLACK_WEBHOOK'];
 
 async function run() {
   try {
@@ -16,7 +16,7 @@ async function run() {
 
     const res = await axios({
       method: 'post',
-      url: 'https://slack.com/api/chat.postMessage',
+      url: `${SLACK_WEBHOOK}`,
       data: Message.createMessage(jobStatus,
         channel,
         userName,
@@ -25,8 +25,7 @@ async function run() {
         actions),
       responseType: 'json',
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': `Bearer ${SLACK_APP_TOKEN}`,
+        'Content-Type': 'application/json; charset=utf-8'
       },
     });
 
