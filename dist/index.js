@@ -41,7 +41,6 @@ class Message {
 	static createMessage(jobStatus, channel, userName, message, userIcon, actions) {
 		let context = github.context;
 		console.log('context', context);
-		console.log('github', github);
 		//let footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
 
 		//  if (actions != '') {
@@ -86,10 +85,8 @@ class Message {
 		const commitId = context.sha.substring(0, 7);
 		switch (eventName) {
 			case 'pull_request':
-				const compareUrl = context.payload.repository.compare_url;
-				const pr = context.payload.repository.pr;
 				return {
-					text: `(<${compareUrl}|${commitId}>) for PR <${pr.url}| #${pr.number} ${pr.title}>`,
+					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pr.url}| #${context.payload.pr.number} ${context.payload.pr.title}>`,
 					fields: [
 						{
 							title: 'Repository',
@@ -127,9 +124,8 @@ class Message {
 				};
 
 			case 'push':
-        const headCommit = context.payload.head_commit;
 				return {
-          title:`<${headCommit.url}| ${headCommit.message}>`,
+          title:`<${context.payload.head_commit.url}|${context.payload.head_commit.message}>`,
 					text: "",
 					fields: [
 						{
