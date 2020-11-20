@@ -55,7 +55,7 @@ export default class Message {
       };
     }
 
-   let data = {
+   return {
       "channel": channel,
       "username": userName,
       "icon_url": userIcon,

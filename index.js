@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const axios = require('axios');
 import Message from './MessageFactory.js'
 
-const SLACK_APP_TOKEN = process.env['SLACK_APP_TOKEN'];
+const SLACK_APP_TOKEN = process.env['SLACK_WEBHOOK'];
 
 async function run() {
   try {
@@ -31,6 +31,7 @@ async function run() {
     });
 
     if (!res.data.ok) {
+      console.log("resopnse",res)
       throw new Error(res.data.error);
     }
 

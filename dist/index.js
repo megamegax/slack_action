@@ -75,7 +75,7 @@ class Message {
       };
     }
 
-   let data = {
+   return {
       "channel": channel,
       "username": userName,
       "icon_url": userIcon,
@@ -128,7 +128,7 @@ const core = __webpack_require__(5127);
 const axios = __webpack_require__(7126);
 
 
-const SLACK_APP_TOKEN = process.env['SLACK_APP_TOKEN'];
+const SLACK_APP_TOKEN = process.env['SLACK_WEBHOOK'];
 
 async function run() {
   try {
@@ -157,6 +157,7 @@ async function run() {
     });
 
     if (!res.data.ok) {
+      console.log("resopnse",res)
       throw new Error(res.data.error);
     }
 
