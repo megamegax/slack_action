@@ -24,7 +24,9 @@ export default class Message {
     userIcon,
     actions
   ) {
-
+    let context = github.context;
+    console.log("context", context)
+    console.log("github", github)
     //let footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
 
     //  if (actions != '') {
@@ -37,9 +39,9 @@ export default class Message {
     } else {
       attachments = {
         "color": Message.jobParameters(jobStatus).color,
-        "author_name": github.context.payload.sender.login,
-        "author_link": github.context.payload.sender.html_url,
-        "author_icon": github.context.payload.sender.avatar_url,
+        "author_name": context.payload.sender.login,
+        "author_link": context.payload.sender.html_url,
+        "author_icon": context.payload.sender.avatar_url,
         "title": message,
         //  "title_link": titleLink,
         "text": Message.getMessage().text,
@@ -63,14 +65,15 @@ export default class Message {
   }
 
   static getMessage() {
-    const eventName = github.context.eventName;
-    const runUrl = `${github.context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-    const commitId = github.context.sha.substring(0, 7);
+    let context = github.context;
+    const eventName = context.eventName;
+    const runUrl = `${context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+    const commitId = context.sha.substring(0, 7);
     switch (eventName) {
       case 'pull_request': return {
         text: `(<${compareUrl}|${commitId}>) for PR <${pr.url}| #${pr.number} ${pr.title}>`,
         fields: [
-          { "title": "Repository", "value": `<${github.context.repository}|${github.context.payload.repository.html_url}`, "short": true },
+          { "title": "Repository", "value": `<${context.repository}|${context.payload.repository.html_url}`, "short": true },
           { "title": "Branch", "value": `<${process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2]}>`, "short": true },
           { "title": "Workflow", "value": `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, "short": true }
         ]
@@ -79,7 +82,7 @@ export default class Message {
       case 'release': return {
         text: `<${release.url}| ${release.title}>`,
         fields: [
-          { "title": "Repository", "value": `<${github.context.payload.repository}|${github.context.payload.repository.html_url}`, "short": true },
+          { "title": "Repository", "value": `<${context.payload.repository}|${context.payload.repository.html_url}`, "short": true },
           { "title": "Branch", "value": `<${process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2]}>`, "short": true },
           { "title": "Workflow", "value": `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, "short": true }
         ]
@@ -88,7 +91,7 @@ export default class Message {
       case 'push': return {
         text: `<${headCommit.url}| ${headCommit.title}>`,
         fields: [
-          { "title": "Repository", "value": `<${github.context.payload.repository}|${github.context.payload.repository.html_url}`, "short": true },
+          { "title": "Repository", "value": `<${context.payload.repository}|${context.payload.repository.html_url}`, "short": true },
           { "title": "Branch", "value": `<${process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2]}>`, "short": true },
           { "title": "Workflow", "value": `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, "short": true }
         ]
