@@ -13,7 +13,7 @@ async function run() {
 		const jobStatus = core.getInput('job_status');
 		let actions = core.getInput('actions');
 
-		const res = await axios({
+		 await axios({
 			method: 'post',
 			url: `${SLACK_WEBHOOK}`,
 			data: Message.createMessage(jobStatus, channel, userName, message, userIcon, actions),
@@ -23,10 +23,6 @@ async function run() {
 			}
     });
     
-		console.log(res);
-		if (!res) {
-			throw new Error(res.data.error);
-		}
 
 		core.setOutput('result', 'success');
 	} catch (error) {
