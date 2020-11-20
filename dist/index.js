@@ -42,13 +42,13 @@ class Message {
 		let context = github.context;
 		console.log('context', context);
 		//let footer = `<${github.context.payload.repository.html_url}|${github.context.payload.repository.full_name}>`;
-
-		//  if (actions != '') {
-		//    actions = JSON.parse(actions);
-		//  }
+    let parsedActions;
+		  if (actions != '') {
+		    parsedActions = JSON.parse(actions);
+		  }
 
 		let attachments;
-		if (message == '' && actions == '') {
+		if (message == '' && parsedActions == '') {
 			attachments = {};
 		} else {
 			attachments = {
@@ -65,7 +65,7 @@ class Message {
 				// "footer": footer,
 				//"footer_icon": footerIcon,
 				ts: Math.floor(new Date().getTime() / 1000),
-				actions: actions
+				actions: parsedActions
 			};
 		}
 
@@ -184,7 +184,7 @@ async function run() {
 		const userName = core.getInput('user_name');
 		const userIcon = core.getInput('user_icon');
 		const jobStatus = core.getInput('job_status');
-		let actions = core.getInput('actions');
+		const actions = core.getInput('actions');
 
 		 await axios({
 			method: 'post',

@@ -11,7 +11,7 @@ async function run() {
 		const userName = core.getInput('user_name');
 		const userIcon = core.getInput('user_icon');
 		const jobStatus = core.getInput('job_status');
-		let actions = core.getInput('actions');
+		const actions = core.getInput('actions');
 
 		 await axios({
 			method: 'post',
