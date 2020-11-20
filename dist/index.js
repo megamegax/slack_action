@@ -75,7 +75,7 @@ class Message {
       };
     }
 
-    data = {
+   let data = {
       "channel": channel,
       "username": userName,
       "icon_url": userIcon,
