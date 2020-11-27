@@ -18,7 +18,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         src: 'index.js'
-    - uses: actions/upload-artifact@v1    <-- optional (upload dist directory)
-      with:
-        name: dist
-        path: dist/
