@@ -33,9 +33,9 @@ export default class Message {
 		} else {
 			attachments = {
 				color: Message.jobParameters(jobStatus).color,
-				author_name: context.payload.sender.login,
-				author_link: context.payload.sender.html_url,
-				author_icon: context.payload.sender.avatar_url,
+				author_name: context.payload?.sender?.login ?? "",
+				author_link: context.payload?.sender?.html_url ?? "",
+				author_icon: context.payload?.sender?.avatar_url ?? "",
 				title: Message.getMessage().title,
 				//  "title_link": titleLink,
 				text: Message.getMessage().text,
