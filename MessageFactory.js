@@ -31,11 +31,19 @@ export default class Message {
 		if (message == '' && parsedActions == '') {
 			attachments = {};
 		} else {
+			let login = 'Scheduled';
+			let html_url = '';
+			let avatar_url = '';
+			if (context.payload.sender != null) {
+				login = context.payload.sender.login;
+				html_url = context.payload.sender.html_url;
+				avatar_url = context.payload.sender.avatar_url;
+			}
 			attachments = {
 				color: Message.jobParameters(jobStatus).color,
-				author_name: context.payload?.sender?.login ?? "",
-				author_link: context.payload?.sender?.html_url ?? "",
-				author_icon: context.payload?.sender?.avatar_url ?? "",
+				author_name: login,
+				author_link: html_url,
+				author_icon: avatar_url,
 				title: Message.getMessage().title,
 				//  "title_link": titleLink,
 				text: Message.getMessage().text,
@@ -110,7 +118,9 @@ export default class Message {
 				let pushCommitMessage = context.payload.head_commit.message.split('\n');
 				let pushText = pushCommitMessage.slice(1, pushCommitMessage.length).join('\n');
 				return {
-					title: `<${context.payload.head_commit.url}| ${context.payload.head_commit.message.split('\n')[0]}>`,
+					title: `<${context.payload.head_commit.url}| ${context.payload.head_commit.message.split(
+						'\n'
+					)[0]}>`,
 					text: pushText,
 					fields: [
 						{
