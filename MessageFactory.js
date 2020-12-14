@@ -69,7 +69,11 @@ export default class Message {
 	static getMessage() {
 		let context = github.context;
 		const eventName = context.eventName;
-		const runUrl = `${context.payload.repository.html_url}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+		let htmlUrl = '';
+		if (context.payload.repository != null) {
+			htmlUrl = context.payload.repository.html_url;
+		}
+		const runUrl = `${htmlUrl}/actions/runs/${process.env.GITHUB_RUN_ID}`;
 		const commitId = context.sha.substring(0, 7);
 		switch (eventName) {
 			case 'pull_request':
@@ -157,8 +161,8 @@ export default class Message {
 						{ title: 'Workflow', value: `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, short: true }
 					]
 				};
-
 			default:
+				console.log(context.payload);
 				return { text: `We don't support the [${github.context.eventName}] event yet.` };
 		}
 	}
