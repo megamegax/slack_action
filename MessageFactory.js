@@ -162,6 +162,8 @@ export default class Message {
 					]
 				};
 			case 'schedule':
+				console.log(context);
+				console.log(context.payload);
 				return {
 					title: `scheduled build`,
 					text: '',
@@ -175,8 +177,7 @@ export default class Message {
 						{ title: 'Workflow', value: `${process.env.GITHUB_WORKFLOW}`, short: true }
 					]
 				};
-			default:
-				console.log(context.payload);
+			default:			
 				return { text: `We don't support the [${github.context.eventName}] event yet.` };
 		}
 	}
