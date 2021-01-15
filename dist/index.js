@@ -181,6 +181,20 @@ class Message {
 						{ title: 'Workflow', value: `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, short: true }
 					]
 				};
+			case 'schedule':
+				return {
+					title: `scheduled build`,
+					text: '',
+					fields: [						
+						{
+							title: 'Branch',
+							value: `<${process.env.GITHUB_HEAD_REF ||
+								(process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2])}>`,
+							short: true
+						},
+						{ title: 'Workflow', value: `${process.env.GITHUB_WORKFLOW}`, short: true }
+					]
+				};
 			default:
 				console.log(context.payload);
 				return { text: `We don't support the [${github.context.eventName}] event yet.` };
