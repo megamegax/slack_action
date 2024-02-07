@@ -29,5 +29,5 @@ outputs:
   result:
     description: 'result'
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'
