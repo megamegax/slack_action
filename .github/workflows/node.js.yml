@@ -13,8 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@v4
     - uses: tool3/ncc@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
         src: 'index.js'
