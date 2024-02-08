@@ -4,9 +4,6 @@ branding:
   icon: 'bell'
   color: 'white'
 inputs:
-  webHook:
-    description: 'slack webhook'
-    required: true
   channel:
     description: 'channel'
     required: true
@@ -25,6 +22,9 @@ inputs:
   actions:
     description: 'actions'
     required: false
+  webhook_url:
+    description: 'Slack Webhook url'
+    required: true
 outputs:
   result:
     description: 'result'
