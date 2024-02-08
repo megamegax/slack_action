@@ -37595,8 +37595,7 @@ class Message {
 		switch (eventName) {
 			case 'pull_request':
 				return {
-					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pr
-						.url}| #${context.payload.pr.number} ${context.payload.pr.title}>`,
+					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pull_request.html_url}| #${context.payload.pull_request.number} ${context.payload.pull_request.title}>`,
 					fields: [
 						{
 							title: 'Repository',
@@ -37605,8 +37604,8 @@ class Message {
 						},
 						{
 							title: 'Branch',
-							value: `<${process.env.GITHUB_HEAD_REF ||
-								(process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2])}>`,
+							value: `${process.env.GITHUB_HEAD_REF ||
+								(process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2])}`,
 							short: true
 						},
 						{ title: 'Workflow', value: `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, short: true }
