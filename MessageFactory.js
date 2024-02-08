@@ -74,11 +74,10 @@ export default class Message {
 			htmlUrl = context.payload.repository.html_url;
 		}
 		const runUrl = `${htmlUrl}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-		const commitId = context.sha.substring(0, 7);
 		switch (eventName) {
 			case 'pull_request':
 				return {
-					text: `(<${context.payload.repository.compare_url}|${commitId}>) for PR <${context.payload.pull_request.html_url}| #${context.payload.pull_request.number} ${context.payload.pull_request.title}>`,
+					text: `<${context.payload.pull_request.html_url}|Pull Request(#${context.payload.pull_request.number}) - ${context.payload.pull_request.title}>`,
 					fields: [
 						{
 							title: 'Repository',
@@ -144,6 +143,25 @@ export default class Message {
 			case 'workflow_dispatch':
 				return {
 					title: `<${runUrl}| triggered manually>`,
+					text: '',
+					fields: [
+						{
+							title: 'Repository',
+							value: `<${context.payload.repository.html_url}|${context.payload.repository.full_name}>`,
+							short: true
+						},
+						{
+							title: 'Branch',
+							value: `<${process.env.GITHUB_HEAD_REF ||
+								(process.env.GITHUB_REF && process.env.GITHUB_REF.split('/')[2])}>`,
+							short: true
+						},
+						{ title: 'Workflow', value: `<${runUrl}|${process.env.GITHUB_WORKFLOW}>`, short: true }
+					]
+				};
+				case 'repository_dispatch':
+				return {
+					title: `<${runUrl}| triggered automatically>`,
 					text: '',
 					fields: [
 						{
