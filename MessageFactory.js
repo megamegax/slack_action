@@ -1,6 +1,6 @@
-const github = require('@actions/github');
+import * as github from '@actions/github';
 
-export default class Message {
+class Message {
 	static jobParameters(status) {
 		switch (status) {
 			case 'success':
@@ -194,8 +194,10 @@ export default class Message {
 						{ title: 'Workflow', value: `${process.env.GITHUB_WORKFLOW}`, short: true }
 					]
 				};
-			default:			
+			default:
 				return { text: `We don't support the [${github.context.eventName}] event yet.` };
 		}
 	}
 }
+
+export default Message;
