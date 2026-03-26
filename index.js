@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const axios = require('axios');
+import core from '@actions/core';
+import axios from 'axios';
 import Message from './MessageFactory.js';
 
 async function run() {

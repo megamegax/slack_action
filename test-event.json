@@ -1,0 +1,15 @@
+{
+	"sender": {
+		"login": "testuser",
+		"html_url": "https://github.com/testuser",
+		"avatar_url": "https://github.com/testuser.png"
+	},
+	"repository": {
+		"html_url": "https://github.com/owner/repo",
+		"full_name": "owner/repo"
+	},
+	"head_commit": {
+		"message": "Test commit message\nThis is the commit body",
+		"url": "https://github.com/owner/repo/commit/abc123"
+	}
+}
